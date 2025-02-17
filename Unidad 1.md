@@ -51,7 +51,7 @@ Básicamente, estos registros ayudan a la CPU a llevar el control de la ejecuci�
 
 Considera el siguiente fragmento de código en lenguaje ensamblador:
 
-```bash
+```asm
 @16384
 D = A
 @16
@@ -67,7 +67,7 @@ Al parecer, el primer @ es el valor, el segundo @ es la posición.
 
 El resultado de este programa es que guarda en la posición 16 de la RAM el valor 16384. Ahora escribe un programa en lenguaje ensamblador que guarde en la posición 32 de la RAM un 100.
 
-```bash
+```asm
 @100
 D = A
 @32
@@ -80,3 +80,85 @@ M = D
 Aquí aplica lo mismo, el valor del primer arroba, va en la posición dada por el numero del segundo arroba
 
 </aside>
+
+
+## Reto
+```asm
+// 1. Cargar en D el valor 1978
+@1978
+D=A
+
+// 2. Guardar en la posición 100 de la RAM el número 69
+@69
+D=A
+@100
+M=D
+
+// 3. Guardar en la posición 200 de la RAM el contenido de la posición 24 de la RAM
+@24
+D=M
+@200
+M=D
+
+// 4. Leer lo que hay en la posición 100 de la RAM, restar 15 y guardar el resultado en la posición 100
+@100
+D=M
+@15
+D=D-A
+@100
+M=D
+
+// 5. Sumar el contenido de la posición 0 de la RAM, el contenido de la posición 1 de la RAM y la constante 69; guardar el resultado en la posición 2 de la RAM
+@0
+D=M
+@1
+D=D+M
+@69
+D=D+A
+@2
+M=D
+
+// 6. Si el valor almacenado en D es igual a 0, saltar a la posición 100 de la ROM
+@100
+D;JEQ
+
+// 7. Si el valor almacenado en la posición 100 de la RAM es menor a 100, saltar a la posición 20 de la ROM
+@100
+D=M      // D = RAM[100]
+@100
+D=D-A    // D = RAM[100] - 100
+@20
+D;JLT
+```
+
+## 8 Considera el siguiente programa:
+```asm
+@var1
+D = M
+@var2
+D = D + M
+@var3
+M = D
+```
+## ¿Qué hace este programa?
+
+El programa realiza lo siguiente:
+
+1. **Carga en D** el valor almacenado en la dirección asignada a `var1`.
+2. **Suma a D** el valor almacenado en la dirección asignada a `var2`.
+3. **Guarda en `var3`** el resultado de la suma.
+
+En resumen, **suma los valores de `var1` y `var2` y almacena el resultado en `var3`**.
+
+**¿En qué posición de la memoria están `var1`, `var2` y `var3`? ¿Por qué en esas posiciones?**
+
+En la máquina Hack, las variables definidas en el código (simbolizadas, por ejemplo, como `var1`, `var2` y `var3`) se asignan automáticamente a direcciones de memoria a partir de la **posición 16**. Esto se debe a que las direcciones **0 a 15** están reservadas para registros predefinidos (R0 a R15).
+
+Por lo tanto, si estas son las primeras variables que se encuentran en el código, se asignarán de la siguiente forma:
+
+- `var1` estará en la posición **16**.
+- `var2` estará en la posición **17**.
+- `var3` estará en la posición **18**.
+
+
+
