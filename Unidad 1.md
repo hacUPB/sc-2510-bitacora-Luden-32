@@ -140,7 +140,7 @@ D = D + M
 @var3
 M = D
 ```
-## ¿Qué hace este programa?
+### ¿Qué hace este programa?
 
 El programa realiza lo siguiente:
 
@@ -160,5 +160,65 @@ Por lo tanto, si estas son las primeras variables que se encuentran en el códig
 - `var2` estará en la posición **17**.
 - `var3` estará en la posición **18**.
 
+## 9 Considera el siguiente programa:
+```c++
+i = 1
+sum = 0
+sum = sum + i
+i = i + 1
+```
+La traducción a lenguaje ensamblador del programa anterior es:
+```asm
+// i = 1
+@i
+M=1
+// sum = 0
+@sum
+M=0
+// sum = sum + i
+@i
+D=M
+@sum
+M=D+M
+// i = i + 1
+@i
+D=M+1
+@i
+M=D
+```
+### ¿Qué hace el programa?
+
+El programa realiza lo siguiente:
+
+1. **Inicializa** la variable `i` con el valor **1**.
+2. **Inicializa** la variable `sum` con el valor **0**.
+3. **Suma** el valor de `i` a `sum`, es decir, realiza:`sum = sum + i`(Después de esta operación, `sum` vale 1).
+4. **Incrementa** la variable `i` en 1, de forma que:`i = i + 1`(Ahora `i` vale 2).
+
+### ¿En qué parte de la memoria RAM están `i` y `sum`? ¿Por qué en esas posiciones?
+
+En el sistema Hack, cuando se usan variables simbólicas en ensamblador, el ensamblador asigna direcciones de memoria a partir de la **dirección 16**, ya que las direcciones **0 a 15** están reservadas para registros predefinidos (R0 a R15).
+
+Por ello, si `i` y `sum` son las primeras variables que aparecen en el código:
+
+- `i` se asignará a la **dirección 16**.
+- `sum` se asignará a la **dirección 17**.
+
+### Optimización de la instrucción `i = i + 1`
+
+El código original para incrementar `i` es:
+
+```asm
+// i = i + 1
+@i
+D=M+1
+@i
+M=D
+```
+
+Este fragmento **ya está optimizado** en el sentido de que utiliza únicamente **dos instrucciones** para realizar la operación de incremento.
+
+- La primera instrucción `@i` carga la dirección de `i` y `D=M+1` lee su valor, le suma 1 y almacena el resultado en D.
+- La segunda instrucción `@i` vuelve a cargar la dirección de `i` y `M=D` guarda el nuevo valor.
 
 
