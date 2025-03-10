@@ -1,83 +1,77 @@
 # Unidad 1
-## Actividad 1
-### ¿Qué es un computador digital moderno?
+## **Actividad 1**
 
-- Una computadora digital moderna, es una maquina electrónica que procesa datos de forma binaria para resolver problemas. Los datos se almacenan en la memoria y se procesan mediante una secuencia de instrucciones, o programa.
+**¿Qué es un computador digital moderno?**
 
-### ¿Cuáles son sus partes?
+Una computadora digital moderna es una máquina electrónica que procesa datos en formato binario para resolver problemas. Los datos se almacenan en la memoria y se procesan mediante una secuencia de instrucciones, conocida como programa informático.
 
-Las partes de un computador digital moderno son:
+**¿Cuáles son sus partes?**
 
-- **Gabinete**: La carcasa de metal o plástico que contiene los componentes internos
-- **Fuente de alimentación**: El componente que suministra energía a la computadora
-- **Placa base**: La tarjeta madre que conecta los componentes internos
-- **Memoria RAM**: El componente que almacena temporalmente datos e instrucciones
-- **Unidad central de procesamiento (CPU)**: El componente que ejecuta las órdenes que se dan a través del teclado y el ratón
-- **Disco rígido**: El componente que almacena información
-- **Tarjeta gráfica (GPU)**: El componente que procesa y renderiza imágenes, videos y gráficos
-- **Pantalla (monitor)**: El componente que muestra la interfaz gráfica del sistema operativo
-- **Teclado**: El dispositivo de entrada que permite al usuario introducir datos y comandos
-- **Ratón**: El dispositivo de entrada que permite al usuario realizar clics y navegar por páginas web y documentos
+Las partes principales son:
 
-## Actividad 2
-### ¿Qué es un programa?
+- **Gabinete**: Carcasa de metal/plástico que protege los componentes internos.
+- **Fuente de alimentación**: Proporciona energía eléctrica a todos los componentes.
+- **Placa base**: Circuito principal que interconecta los componentes.
+- **Memoria RAM**: Almacena datos e instrucciones de forma temporal.
+- **CPU (Unidad Central de Procesamiento)**: Ejecuta instrucciones y procesa datos.
+- **Disco duro**: Almacena datos de forma permanente.
+- **GPU (Tarjeta gráfica)**: Procesa gráficos y vídeos.
+- **Monitor**: Muestra la interfaz gráfica al usuario.
+- **Teclado**: Dispositivo de entrada para texto/comandos.
+- **Ratón**: Dispositivo de entrada para interactuar con la interfaz.
 
-- Un programa es un conjunto de acciones o actividades ordenadas para alcanzar un objetivo especifico. Tambien puede referirse a un conjunto de instrucciones que permiten a una computadora realizar tareas.
+---
 
-### ¿Qué es un lenguaje ensamblador?
+## **Actividad 2**
 
-- es un lenguaje de programación de bajo nivel que se utiliza para comunicarse directamente con el hardware de una computadora. Es una representación simbólica del código maquina, que es el lenguaje que entiende directamente la computadora.
+**¿Qué es un programa?**
 
-### ¿Qué es el lenguaje de maquina?
+Es un conjunto de instrucciones estructuradas que indican a la computadora cómo realizar una tarea específica.
 
-- Tambien conocido como código de maquina, es el lenguaje fundamental que entiende directamente el hardware de una computadora.
+**¿Qué es un lenguaje ensamblador?**
 
-## Actividad 3
-### ¿Qué son PC, D y A?
+Lenguaje de programación de bajo nivel que representa simbólicamente el código máquina, permitiendo control directo del hardware.
 
-- **PC**: Program Counter (contador de programa) Es un registro en la CPU que guarda la dirección de la siguiente instrucción a ejecutar.
-- **D**: Puede referirse al Dato en ciertos contextos, o a registros como el Registro D en algunas arquitecturas.
-- **A**: Generalmente representa el **Acumulador,** un registro especial en la CPU donde se almacenan temporalmente resultados de operaciones aritméticas y lógicas.
+**¿Qué es el lenguaje de máquina?**
 
-### ¿Para qué los usa la CPU?
+Código binario (ceros y unos) que la CPU ejecuta directamente. Es el único lenguaje entendido por el hardware.
 
-- **PC: l**leva la dirección de la siguiente instrucción a ejecutar. Se incrementa automáticamente despues de cada instrucción o salta a otra dirección en caso de una instrucción de control de flujo
-- **D**: Se usa para almacenar valores temporales que la CPU necesita para operar, como operandos en operaciones aritméticas o lógicas. En algunas arquitecturas, puede referirse a un registro específico.
-- **A**: Es un registro especial donde se guardan resultados intermedios de operaciones aritméticas con el acumulador.
+---
 
-Básicamente, estos registros ayudan a la CPU a llevar el control de la ejecución del programa y procesar datos eficientemente.
+## **Actividad 3**
 
-## Actividad 4
+**¿Qué son PC, D y A?**
 
-Considera el siguiente fragmento de código en lenguaje ensamblador:
+- **PC (Program Counter)**: Registro que almacena la dirección de la próxima instrucción a ejecutar.
+- **D**: Registro de datos para almacenar valores temporales en operaciones.
+- **A (Acumulador)**: Registro especial para resultados intermedios de operaciones aritméticas/lógicas.
 
-```asm
+**¿Para qué los usa la CPU?**
+
+- **PC**: Controla el flujo del programa, actualizándose automáticamente o con saltos.
+- **D**: Almacena operandos para operaciones (ej: sumar dos números).
+- **A**: Facilita cálculos al mantener resultados parciales accesibles.
+
+Estos registros optimizan la ejecución de instrucciones y el manejo de datos.
+
+---
+
+## **Actividad 4**
+
+**Código original:**
+
+```
 @16384
-D = A
+D = A     // Almacena 16384 en el registro D
 @16
-M = D
+M = D     // Guarda D (16384) en la dirección 16 de la RAM
 ```
 
-<aside>
-💡
-
-Al parecer, el primer @ es el valor, el segundo @ es la posición.
-
-</aside>
-
-El resultado de este programa es que guarda en la posición 16 de la RAM el valor 16384. Ahora escribe un programa en lenguaje ensamblador que guarde en la posición 32 de la RAM un 100.
-
-```asm
+**Explicación:**
+```
+El primer `@` carga un valor en el registro A, y el segundo `@` selecciona una dirección de memoria.
 @100
-D = A
+D = A     // Carga el valor 100 en D
 @32
-M = D
+M = D     // Almacena D (100) en la dirección 32 de la RAM
 ```
-
-<aside>
-💡
-
-Aquí aplica lo mismo, el valor del primer arroba, va en la posición dada por el numero del segundo arroba
-
-</aside>
-
