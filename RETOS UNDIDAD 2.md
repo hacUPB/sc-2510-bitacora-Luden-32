@@ -2,7 +2,7 @@
 
 **Código (RAE1):**
 
-```
+```asm
 // Suma de 1 a 100 (ciclo while)
 @i      // Dirección 16 (variable i)
 M=1     // i = 1
@@ -46,7 +46,7 @@ M=M+1   // i++
 
 **Código (RAE1):**
 
-```
+```asm
 // Suma de 1 a 100 (ciclo for)
 @sum
 M=0     // sum = 0
@@ -85,7 +85,7 @@ M=M+1   // i++
 
 **Caso 1: Modificar variable mediante puntero (C++ → Ensamblador)**
 
-```
+```asm
 // int a = 10; int *p; p = &a; *p = 20;
 @10
 D=A
@@ -104,7 +104,7 @@ M=20    // *p = 20
 
 **Caso 2: Leer variable mediante puntero (C++ → Ensamblador)**assembly
 
-```
+```asm
 // int a=10; int b=5; int *p; p=&a; b=*p;
 @10
 D=A
@@ -143,7 +143,7 @@ M=D     // b = D (b = 10)
 
 **Código (RAE1):**
 
-```
+```asm
 // Función suma(a, b)
 (SUMA)
 @ARG1   // Parámetro a (dirección 23)
