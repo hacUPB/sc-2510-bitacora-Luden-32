@@ -28,137 +28,340 @@ Los dispositivos se sincronizan mediante **bucles de actualización continua**�
 **Programa en Hack Assembly**:
 
 ```asm
-(MAIN)
+(START)
     @KBD
     D=M
-    @68 // 'd' en ASCII
+    @ERASE
+    D;JEQ         // Si no se presiona ninguna tecla, ir a ERASE
+
+    @KBD
+    D=M
+    @100
     D=D-A
     @DRAW
-    D;JEQ
+    D;JEQ         // Si se presiona 'd', ir a DRAW
 
-    // Borrar pantalla
+    @ERASE
+    0;JMP        // Si se presionó otra tecla, borrar
+
+// ----------------------------------------------------------------
+// DRAW: Dibuja la imagen (código generado por nand2tetris)
+// ----------------------------------------------------------------
+(DRAW)
     @SCREEN
     D=A
-    @addr
-    M=D
-(CLEAR_LOOP)
-    @addr
-    A=M
-    M=0
-    @addr
-    M=M+1
-    D=M
-    @KBD
-    D=D-A
-    @MAIN
-    D;JEQ
-    @CLEAR_LOOP
+    @R12
+    AD=D+M
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @159
+    AD=D+A
+    M=-1
+    AD=A+1 
+    M=-1
+    @START
     0;JMP
 
-(DRAW)
-    // Asume datos de imagen en IMAGE_DATA
-    @IMAGE_DATA
-    D=A
-    @img
-    M=D
+// ----------------------------------------------------------------
+// ERASE: Borra la pantalla (SCREEN)
+// ----------------------------------------------------------------
+(ERASE)
     @SCREEN
     D=A
-    @addr
+    @R13
     M=D
-(DRAW_LOOP)
-    @img
-    A=M
-    D=M
-    @addr
-    A=M
-    M=D
-    @img
-    M=M+1
-    @addr
-    M=M+1
-    @KBD
+
+    @8192
     D=A
-    @addr
-    D=D-M
-    @MAIN
-    D;JEQ
-    @DRAW_LOOP
+    @R14
+    M=D
+
+(ERASE_LOOP)
+    @0
+    D=A
+    @R13
+    A=M
+    M=0
+
+    @R13
+    M=M+1
+
+    @R14
+    M=M-1
+    D=M
+    @ERASE_LOOP
+    D;JGT
+
+    @START
     0;JMP
 ```
 
 ### Actividad 4: 'd' muestra imagen, 'e' borra
 ```asm
-(MAIN)
+// Entrada: espera por la tecla D (ASCII 68) o E (ASCII 69)
+(START)
     @KBD
-    D=M
-    @current
-    M=D
-
-    // Verificar 'd'
-    @current
     D=M
     @68
     D=D-A
     @DRAW
     D;JEQ
 
-    // Verificar 'e'
-    @current
+    @KBD
     D=M
     @69
     D=D-A
-    @CLEAR
+    @ERASE
     D;JEQ
 
-    @MAIN
+    @START
     0;JMP
 
+// ----------------------------------------------------------------
+// Rutina DRAW: Dibuja la imagen (código generado por nand2tetris)
+// ----------------------------------------------------------------
 (DRAW)
-    @IMAGE_DATA
-    D=A
-    @img
-    M=D
     @SCREEN
     D=A
-    @addr
-    M=D
-(D_LOOP)
-    @img
+    @R12
+    AD=D+M
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @31
+    AD=D+A
+    @1024 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    AD=A+1 
+    @64 
+    D=D+A 
+    A=D-A 
+    M=D-A 
+    D=A 
+    @159
+    AD=D+A
+    M=-1
+    AD=A+1 
+    M=-1
+    @R13
     A=M
-    D=M
-    @addr
-    A=M
-    M=D
-    @img
-    M=M+1
-    @addr
-    M=M+1
-    @KBD
-    D=A
-    @addr
-    D=D-M
-    @MAIN
-    D;JEQ
-    @D_LOOP
-    0;JMP
+    D;JMP
 
-(CLEAR)
+// ----------------------------------------------------------------
+// Rutina ERASE: Borra la pantalla (SCREEN)
+// ----------------------------------------------------------------
+(ERASE)
     @SCREEN
     D=A
-    @addr
+    @R13
     M=D
-(E_LOOP)
-    @addr
+
+    @8192
+    D=A
+    @R14
+    M=D
+
+(ERASE_LOOP)
+    @0
+    D=A
+    @R13
     A=M
     M=0
-    @addr
+
+    @R13
     M=M+1
-    @KBD
-    D=A
-    @addr
-    D=D-M
-    @MAIN
-    D;JEQ
-    @E_LOOP
+
+    @R14
+    M=M-1
+    D=M
+    @ERASE_LOOP
+    D;JGT
+
+    @START
     0;JMP
 ```
