@@ -1,6 +1,5 @@
 # Unidad 1
 ## **Actividad 1**
-
 **¿Qué es un computador digital moderno?**
 
 Una computadora digital moderna es una máquina electrónica que procesa datos en formato binario para resolver problemas. Los datos se almacenan en la memoria y se procesan mediante una secuencia de instrucciones, conocida como programa informático.
